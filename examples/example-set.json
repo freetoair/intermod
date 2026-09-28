@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "tx": "453.200\n458.750\n463.400",
+  "rx": "447.65",
+  "mf": true,
+  "mf_freq": "21.4",
+  "mf_filter_khz": 12.5,
+  "lo_strana": "obe",
+  "max_order": 5,
+  "tolerancija_khz": 25.0,
+  "show_all": false,
+  "slabljenje_db": 20.0,
+  "mereni_nivoi": false,
+  "iip3_dbm": 0.0,
+  "prag_dbm": -110.0,
+  "vrhovi_db": 10.0
+}

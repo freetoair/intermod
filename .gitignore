@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# PyInstaller output (release binaries go to GitHub Releases)
+build/
+dist/
+
+# Local, unrelated to this program
+gps-udev/
+
+# Saved frequency sets / traces
+*.json
+*.csv
+
+# ...except the bundled examples
+!examples/*.json
+!examples/*.csv

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Pokretanje kalkulatora frekvencijskih kombinacija (PySide6 iz venv-a)
+DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+exec "$DIR/venv/bin/python" "$DIR/intermod.py" "$@"
