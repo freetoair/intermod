@@ -60,7 +60,7 @@ commands #69 Enter Remote, #24 Query Trace Names, #33 Recall Sweep Trace,
 Requires Python 3.10+.
 
 ```bash
-git clone https://github.com/<your-account>/intermod.git
+git clone https://github.com/freetoair/intermod.git
 cd intermod
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
