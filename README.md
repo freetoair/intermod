@@ -72,7 +72,9 @@ On Linux the `intermod` launcher script runs the program from `venv/`.
 To access a serial port on Linux your user must be in the `dialout` group
 (or the port must be otherwise accessible).
 
-A ready-to-run Linux binary is available on the Releases page.
+Ready-to-run binaries for **Linux** (`intermod-linux-x86_64`) and **Windows**
+(`intermod-windows-x64.exe`, built by GitHub Actions) are on the
+[Releases page](https://github.com/freetoair/intermod/releases).
 
 ### Building a standalone binary
 

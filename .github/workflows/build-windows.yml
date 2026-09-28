@@ -1,0 +1,55 @@
+name: Windows build
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Attach the .exe to this existing release tag (e.g. v1.0.0); leave empty for artifact only"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+
+      - name: Smoke test
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          python -c "import intermod, ms2711d; print(intermod.parse_frekvencije('455 kHz, 2,4 GHz')); print(ms2711d.portovi())"
+
+      - name: Build
+        run: |
+          pyinstaller --noconfirm intermod-kalkulator.spec
+          Move-Item dist\intermod-kalkulator.exe dist\intermod-windows-x64.exe
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: intermod-windows-x64
+          path: dist/intermod-windows-x64.exe
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/') || inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release_tag != '' && inputs.release_tag || github.ref_name }}
+        run: |
+          gh release view $env:TAG 2>$null
+          if ($LASTEXITCODE -ne 0) { gh release create $env:TAG --title $env:TAG --generate-notes }
+          gh release upload $env:TAG dist\intermod-windows-x64.exe --clobber
